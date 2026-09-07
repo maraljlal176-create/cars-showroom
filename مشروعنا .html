@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض السيارات الفاخرة</title>
+    <link rel="stylesheet" href="مشروعنا.css">
+</head>
+<body>
+
+    <header>
+        <h1>معرض السيارات الفاخرة</h1>
+        <p>اختر سيارتك المفضلة واستعرض التفاصيل بنقرة واحدة</p>
+    </header>
+
+    <main class="container">
+        <div class="cars-grid" id="carsGrid"></div>
+
+    </main>
+
+    <!-- Modal التفاصيل وخيارات الشراء -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div class="modal-body">
+                <img id="modalLogo" class="brand-logo" src="" alt="شعار الشركة">
+                <h2 id="modalTitle">اسم السيارة</h2>
+                <div class="modal-details">
+                    <p><strong>الشركة التابعة:</strong> <span id="modalBrand"></span></p>
+                    <p><strong>الموديل / السنة:</strong> <span id="modalModel"></span></p>
+                    <p><strong>اللون:</strong> <span id="modalColor"></span></p>
+
+                    <p><strong>بلد التصنيع:</strong> <span id="modalCountry"></span></p>
+                    <p><strong>السعر للقطعة:</strong> <span id="modalPrice" class="price-tag"></span></p>
+                </div>
+
+                <!-- اختيار نوع الشراء -->
+                <div class="purchase-type-selection">
+                    <h3>اختر نوع الشراء:</h3>
+                    <div class="type-buttons">
+                        <button type="button" class="btn btn-retail" onclick="selectPurchaseType('retail')">شراء بالتجزئة</button>
+                        <button type="button" class="btn btn-wholesale" onclick="selectPurchaseType('wholesale')">شراء بالجملة (خصم 5%)</button>
+                    </div>
+
+                </div>
+
+                <!-- نموذج شراء السيارة -->
+                <form id="purchaseForm" class="purchase-form" style="display: none;" onsubmit="handlePurchaseSubmit(event)">
+                    <h3 id="formTitle">بيانات طلب الشراء</h3>
+                    
+                    <div class="form-group">
+                        <label for="buyerName">الاسم الكامل:</label>
+                        <input type="text" id="buyerName" required placeholder="أدخل اسمك الثلاثي">
+                    </div>
+
+                    <div class="form-group">
+                        <label 
+
+for="buyerLocation">موقع / عنوان المشتري:</label>
+                        <input type="text" id="buyerLocation" required placeholder="المدينة، الشارع، رقم المبنى">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentMethod">طريقة الدفع:</label>
+                        <select id="paymentMethod" required>
+                            <option value="" disabled selected>اختر وسيلة الدفع</option>
+                            <option value="محفظة إلكترونية">محفظة إلكترونية</option>
+                            <option value="فيزا / ماستركارد">فيزا / ماستركارد (Visa/Mastercard)</option>
+                            <option value="تحويل بنكي">تحويل بنكي مباشر</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carQuantity">الكمية المطلوبة:</label>
+                        <input type="number" id="carQuantity" min="1" value="1" required onchange="calculateTotal()" oninput="calculateTotal()">
+                    </div>
+
+                    <div class="price-summary">
+                        <p>إجمالي السعر قبل الخصم: <span id="rawTotal">$0</span></p>
+                        <p id="discountRow" style="display: none; color: #2ec4b6;">قيمة الخصم (5%): <span id="discountAmount">$0</span></p>
+                        <p class="final-price">الإجمالي النهائي: <span id="finalTotal">$0</span></p>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">تأكيد وإرسال الطلب</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="مشروعنا.js"></script>
+</body>
+</html>
